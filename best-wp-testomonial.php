@@ -172,16 +172,31 @@ if ( $bwqt_client_review == 1)  {
 			add_action( 'init', 'bwpt_testomonial_shortcode' );
 		
 			// redirect
-			 register_activation_hook( __FILE__, '' ) ;
-				$file = plugin_basename( $file );
-				add_action( 'activate_' . $file, $callback );
+			 register_activation_hook( __FILE__, 'bwpt_plugin_activate' ) ;
+				add_action('admin_init','bwpt_plugin_redirect');
+
+			function bwpt_plugin_activate() {
+				add_option('bwpt_plugin_do_activation_redirect', true);
+			}
+
+			function bwpt_plugin_redirect() {
+				if (get_option('bwpt_plugin_do_activation_redirect', false)) {
+					delete_option('bwpt_plugin_do_activation_redirect');
+					if(!isset($_GET['activate-multi'])) {
+						wp_redirect('edit.php?post_type=testimonial?page=bwpt_settings_pages');
+					}
+				}
+			}
+			// 	add_action( 'activate_' . $file, $callback );
 			
-			
+			/**
+ * Adds a submenu page under a custom post type parent.
+ */
 ?>
 
             
                 
             
   
-<!-- add_action( 'init', 'twentytwentyfour_pattern_categories' );
+<!-- 
 if(function_exists('bwpt_testomonial_shortcode')){ bwpt_testimonial_loop() ; }  -->
