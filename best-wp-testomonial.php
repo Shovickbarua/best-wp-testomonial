@@ -214,7 +214,7 @@ foreach (glob(plugin_dir_path(__FILE__) . "inc/*.php") as $php_file)
 
 
 
-
+<!-- xdkjcjkx -->
 
 <!-- 
 if(function_exists('bwpt_testomonial_shortcode')){ bwpt_testimonial_loop() ; }  -->
